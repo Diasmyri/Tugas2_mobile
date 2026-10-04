@@ -1,181 +1,179 @@
-# Tugas2_SistemPerpustakaan
+# Tugas 2 - Sistem Perpustakaan
 
-Nama: Dias Mayri
+**Nama:** Dias Mayri
 
-# Problem Statement
+## Problem Statement
 
-Sistem perpustakaan ini merupakan sistem sederhana yang digunakan untuk mengecek proses peminjaman buku. Sistem akan mengecek jumlah buku yang sedang dipinjam dan jumlah buku yang ingin dipinjam. Jika jumlah buku lebih dari 3 maka peminjaman gagal. Sistem juga mengecek apakah buku masih tersedia atau sedang dipinjam.
+Sistem perpustakaan digunakan untuk mengatur peminjaman buku.  
+Pengguna hanya boleh meminjam maksimal 3 buku. Buku yang sedang dipinjam tidak bisa dipinjam lagi. Jika terlambat mengembalikan buku, maka dikenakan denda Rp1.000 per hari.
 
-Selain itu sistem dapat menghitung denda apabila pengguna terlambat mengembalikan buku. Denda yang diberikan adalah Rp1000 untuk setiap hari keterlambatan.
+## Actor
 
-# Actor
+**Petugas Perpustakaan**
 
-Aktor yang menggunakan sistem adalah petugas perpustakaan yang mengatur proses peminjaman dan denda buku.
+Petugas dapat mengecek peminjaman buku dan menghitung denda.
 
-# Input dan Output
+## Input dan Output
 
-## Input
+### Input
+- Daftar buku yang sedang dipinjam
+- Buku yang ingin dipinjam
+- Status ketersediaan buku
+- Jumlah hari keterlambatan
 
-- dipinjam (int): jumlah buku yang sedang dipinjam
-- barupinjam (int): jumlah buku yang ingin dipinjam
-- tersedia (bool): mengecek apakah buku tersedia atau tidak
-- hari (int): jumlah hari keterlambatan
+### Output
+- Berhasil atau tidaknya peminjaman buku
+- Jumlah denda keterlambatan
 
-## Output
+## Functional Requirements
 
-Program akan menampilkan hasil peminjaman seperti berhasil meminjam buku, gagal karena maksimal 3 buku, atau gagal karena buku sedang dipinjam.
+1. Mengecek apakah pengguna masih bisa meminjam buku.
+2. Mengecek apakah buku tersedia.
+3. Menambahkan buku ke daftar peminjaman jika bisa dipinjam.
+4. Menghitung denda jika buku terlambat dikembalikan.
 
-Program juga menampilkan jumlah denda keterlambatan.
+## Business Rule
 
-# Functional Requirements
+- Maksimal meminjam 3 buku.
+- Buku yang sedang dipinjam tidak dapat dipinjam lagi.
+- Jika terlambat, denda sebesar Rp1.000 per hari.
+- Jika tidak terlambat, denda Rp0.
 
-- dapat mengecek jumlah buku yang sedang dipinjam
-- dapat mengecek jumlah buku yang ingin dipinjam
-- dapat mengecek maksimal peminjaman 3 buku
-- dapat mengecek buku tersedia atau sedang dipinjam
-- dapat menghitung denda berdasarkan jumlah hari keterlambatan
-- dapat menampilkan hasil peminjaman dan denda
+## Decomposition
 
-# Business Rule
+Program dibagi menjadi beberapa bagian:
 
-- BR-01 : Jumlah buku yang dapat dipinjam maksimal 3 buku
-- BR-02 : Jika jumlah buku yang dipinjam lebih dari 3 maka peminjaman gagal
-- BR-03 : Jika buku tersedia maka peminjaman berhasil
-- BR-04 : Jika buku tidak tersedia maka peminjaman gagal
-- BR-05 : Denda keterlambatan dikenakan biaya Rp1000 per hari
-- BR-06 : Jika tidak ada keterlambatan maka denda Rp0
+1. Mengecek peminjaman buku.
+2. Memproses peminjaman buku.
+3. Menghitung denda.
 
-# Decomposition
+## Pattern Recognition
 
-Sistem Perpustakaan
-|
-|-- dipinjam -> mengecek jumlah buku yang sedang dipinjam
-|-- barupinjam -> mengecek jumlah buku yang ingin dipinjam
-|-- tersedia -> mengecek apakah buku tersedia atau sedang dipinjam
-|-- prosesPeminjaman -> mengecek apakah peminjaman berhasil atau gagal
-|-- hari -> menghitung jumlah hari keterlambatan
-|-- hitungDenda -> menghitung total denda berdasarkan hari keterlambatan
+Pola yang digunakan adalah pengecekan kondisi.
 
-# Pattern Recognition
+Contohnya:
+- Jika jumlah buku sudah 3, maka tidak bisa meminjam.
+- Jika buku tidak tersedia, maka tidak bisa dipinjam.
+- Jika terlambat, maka denda dihitung berdasarkan jumlah hari.
 
-- Pola pengecekan jumlah buku: jumlah buku yang sedang dipinjam ditambah dengan jumlah buku baru kemudian dicek apakah lebih dari 3.
-- Pola pengecekan ketersediaan: menggunakan tipe data bool untuk melihat buku tersedia atau tidak.
-- Pola perhitungan denda: jumlah hari keterlambatan dikalikan dengan Rp1000.
-- Pola kondisi: menggunakan if untuk menentukan hasil peminjaman dan denda.
+## Abstraction
 
-# Abstraction
+Data yang digunakan cukup berupa:
 
-Sistem Perpustakaan
-|
-|-- dipinjam
-|-- barupinjam
-|-- tersedia
-|-- hari
-|-- prosesPeminjaman
-|-- hitungDenda
+- `dipinjam` = jumlah atau daftar buku yang sedang dipinjam.
+- `barupinjam` = buku yang ingin dipinjam.
+- `tersedia` = status buku.
+- `hari` = jumlah hari keterlambatan.
 
-Tipe data utama:
-int digunakan untuk menghitung jumlah buku dan jumlah hari keterlambatan, sedangkan bool digunakan untuk mengecek apakah buku tersedia atau tidak.
+## Algorithm
 
-# Flowchart
+1. Masukkan data buku yang sedang dipinjam.
+2. Masukkan buku yang ingin dipinjam.
+3. Cek jumlah buku yang sedang dipinjam.
+4. Cek apakah buku tersedia.
+5. Jika memenuhi syarat, buku berhasil dipinjam.
+6. Masukkan jumlah hari keterlambatan.
+7. Jika terlambat, hitung denda Rp1.000 per hari.
+8. Tampilkan hasil.
 
-[Start]
-     |
-     ▼
-[panggil prosesPeminjaman]
-     |
-     ▼
-[dipinjam + barupinjam > 3?]
-     |
-    ya ─────────────► [return Gagal: Maksimal pinjam 3 buku]
-     |
-   tidak
-     |
-     ▼
-[tersedia?]
-     |
-    ya ─────────────► [return Berhasil meminjam buku]
-     |
-   tidak
-     |
-     ▼
-[return Gagal: Buku sedang dipinjam]
-     |
-     ▼
-[panggil hitungDenda]
-     |
-     ▼
-[hari > 0?]
-     |
-    ya ─────────────► [hari × 1000]
-     |
-   tidak
-     |
-     ▼
-[return 0]
-     |
-     ▼
-[selesai]
+## Flowchart
 
-# Pseudocode
+```text
+Mulai
+  |
+Input data peminjaman
+  |
+Cek jumlah buku
+  |
+Apakah masih kurang dari 3?
+  |--- Tidak ---> Gagal meminjam
+  |
+ Ya
+  |
+Cek ketersediaan buku
+  |
+Apakah buku tersedia?
+  |--- Tidak ---> Gagal meminjam
+  |
+ Ya
+  |
+Berhasil meminjam
+  |
+Input hari keterlambatan
+  |
+Hitung denda
+  |
+Tampilkan hasil
+  |
+Selesai
+```
 
-String prosesPeminjaman(int dipinjam, int barupinjam, bool tersedia) {
+## Pseudocode
 
-  if (dipinjam + barupinjam > 3) {
-    return "Gagal: Maksimal pinjam 3 buku";
+```text
+Mulai
+
+Input dipinjam
+Input barupinjam
+Input tersedia
+
+Jika jumlah dipinjam >= 3
+    Tampilkan "Tidak bisa meminjam"
+Jika tidak
+    Jika tersedia = false
+        Tampilkan "Buku tidak tersedia"
+    Jika tidak
+        Tampilkan "Berhasil meminjam buku"
+
+Input hari
+
+Jika hari <= 0
+    denda = 0
+Jika tidak
+    denda = hari * 1000
+
+Tampilkan denda
+
+Selesai
+```
+
+## Implementasi Dart
+
+```dart
+void prosesPeminjaman(
+  List<String> dipinjam,
+  String barupinjam,
+  bool tersedia,
+) {
+  if (dipinjam.length >= 3) {
+    print("Tidak bisa meminjam, maksimal 3 buku.");
+  } else if (!tersedia) {
+    print("Buku tidak tersedia.");
+  } else {
+    dipinjam.add(barupinjam);
+    print('Berhasil meminjam "$barupinjam".');
   }
-
-  if (tersedia) {
-    return "Berhasil meminjam buku";
-  }
-
-  return "Gagal: Buku sedang dipinjam";
 }
 
 int hitungDenda(int hari) {
-
-  if (hari > 0) {
-    return hari * 1000;
+  if (hari <= 0) {
+    return 0;
   }
 
-  return 0;
-}
-
-# Implementasi Dart
-
-String prosesPeminjaman(int dipinjam, int barupinjam, bool tersedia) {
-  if (dipinjam + barupinjam > 3) {
-    return 'Gagal: Maksimal pinjam 3 buku';
-  }
-
-  if (tersedia) {
-    return 'Berhasil meminjam buku';
-  }
-
-  return 'Gagal: Buku sedang dipinjam';
-}
-
-int hitungDenda(int hari) {
-  if (hari > 0) {
-    return hari * 1000;
-  }
-
-  return 0;
+  return hari * 1000;
 }
 
 void main() {
-  print(prosesPeminjaman(1, 1, true));
-  print(prosesPeminjaman(2, 2, true));
-  print(prosesPeminjaman(0, 1, false));
+  List<String> dipinjam = ["Bumi", "Laskar Pelangi"];
 
-  print('Denda: Rp${hitungDenda(0)}');
-  print('Denda: Rp${hitungDenda(4)}');
+  print("Daftar buku: $dipinjam");
+
+  prosesPeminjaman(dipinjam, "Filosofi Teras", true);
+  prosesPeminjaman(dipinjam, "Laut Bercerita", true);
+
+  print("Daftar akhir: $dipinjam");
+
+  print("Denda 0 hari: Rp ${hitungDenda(0)}");
+  print("Denda 3 hari: Rp ${hitungDenda(3)}");
 }
-
-# Output
-
-Berhasil meminjam buku
-Gagal: Maksimal pinjam 3 buku
-Gagal: Buku sedang dipinjam
-Denda: Rp0
-Denda: Rp4000
+```
